@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
+.app {
+  width: 100vw;
+  height: 100vh;
+  background-color: #1D2123;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  display: flex;
+  height: 8.77vh;
+
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header .musica-logo {
+  width: 2.65vw;
+
+  margin-left: 2.265vw;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header .search-icon {
+  width: 1.25vw;
+  
+  margin-left: 4.84vw;
+}
+
+/* <--------------------------------------------------------------------------------------------------------------------> */
+
+/* body */
+
+.body-wrapper {
+  display: flex;
+
+  height: 91.23vh;
+}
+
+.body-wrapper .nav-bar-wrapper {
+  /* flex: 1; */
+}
+
+.body-wrapper .nav-bar-wrapper .nav-bar {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+  width: 4.0625vw;
+  height: 27.644vh;
+
+  margin-left: 1.56vw;
+
+  background-color: #1A1E1F;
+  border-radius: 32px;
 }
 
-.App-link {
-  color: #61dafb;
+.body-wrapper .nav-bar-wrapper .personal-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 4.0625vw;
+  height: 15.26vh;
+
+  margin-left: 1.56vw;
+
+  background-color: #1A1E1F;
+  border-radius: 32px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.body-wrapper .content-wrapper {
+  width: 87.89vw;
+
+  margin-left: 1.875vw;
+}
+
+.body-wrapper .nav-bar-wrapper .nav-bar .nav-bar-icon {
+  width: 1.71vw;
 }

@@ -1,0 +1,42 @@
+.homepage .playlist-container {
+    display: flex;
+
+    justify-content: space-around;
+}
+
+.homepage .playlist-container .currated-playlist {
+    width: 53.59vw;
+    height: 44.83vh;
+
+    border-radius: 40px;
+
+    object-fit: contain;
+}
+
+.chart-card {
+    display: flex;
+
+    align-items: center;
+
+    width: 32.57vw;
+    height: 11.53vh;
+
+    margin-top: 1.44vh;
+
+    border-radius: 20px;
+
+    background-color: #1A1E1F;
+}
+
+.chart-card .thumbnail-wrapper {
+    align-content: center;
+}
+
+.chart-card .thumbnail {
+    width: 4.92vw;
+    aspect-ratio: 1;
+
+    border-radius: 10px;
+
+    object-fit: contain;
+}
