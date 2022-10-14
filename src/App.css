@@ -1,7 +1,19 @@
+@font-face {
+  font-family: Quicksand-Bold;
+  src: url(./fonts/Quicksand-Bold.ttf);
+}
+
+@font-face {
+  font-family: Quicksand-Regular;
+  src: url(./fonts/Quicksand-Regular.ttf);
+}
+
 .app {
   width: 100vw;
   height: 100vh;
   background-color: #1D2123;
+
+  font-family: Quicksand-Regular;
 }
 
 header {
@@ -69,8 +81,16 @@ header .search-icon {
 
 .body-wrapper .content-wrapper {
   width: 87.89vw;
+  height: 91.22vh;
 
   margin-left: 1.875vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.body-wrapper .content-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .body-wrapper .nav-bar-wrapper .nav-bar .nav-bar-icon {
