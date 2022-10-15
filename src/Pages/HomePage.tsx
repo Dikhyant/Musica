@@ -54,6 +54,7 @@ type HorizontallyLinedMusicProps = {
     heading: string;
     musicItems: MusicItem[];
     style?: React.CSSProperties;
+    className?: string;
 }
 
 type CardProps = {
@@ -76,38 +77,50 @@ function HorizontallyLinedMusic(props: HorizontallyLinedMusicProps) {
     const cards = props.musicItems.map((item) => (
     <div style={{display: "flex"}} >
         <Card musicItem={item} />
-        <div style={{width: "2.34vw", height: "5vh"}} ></div>
+        <div className="gap-btw-cards" ></div>
     </div>
         ))
 
     let isMouseDown:boolean = false;
     let mouseDownRelativeX:number;
     let initialScrollLeft:number;
+
+    const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (e)=>{
+        console.log("mouse down")
+        isMouseDown = true;
+        e.preventDefault();
+        mouseDownRelativeX = e.pageX - e.currentTarget.offsetLeft;
+        initialScrollLeft = e.currentTarget.scrollLeft;
+    };
+
+    const handleMouseUp: React.MouseEventHandler<HTMLDivElement> = e=>{
+        isMouseDown = false;
+    };
+
+    const handleMouseLeave: React.MouseEventHandler<HTMLDivElement> = e=>{
+        isMouseDown = false;
+    };
+
+    const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = e=>{
+        if(!isMouseDown) return;
+        const displacement:number = e.pageX - e.currentTarget.offsetLeft - mouseDownRelativeX;
+        e.currentTarget.scrollLeft = initialScrollLeft - displacement;
+        console.log(displacement)
+    };
+
+
     return (
-        <div className="horizontally-lined-music" style={props.style} >
+        <div className={`horizontally-lined-music ${props.className}`} style={props.style} >
             <div className="heading" >{props.heading}</div>
             <div className="music-wrapper" 
             
-            onMouseDown={e=>{
-                isMouseDown = true;
-                e.preventDefault();
-                mouseDownRelativeX = e.pageX - e.currentTarget.offsetLeft;
-                initialScrollLeft = e.currentTarget.scrollLeft;
-            }} 
+            onMouseDown={handleMouseDown} 
             
-            onMouseUp={e=>{
-                isMouseDown = false;
-            }}
+            onMouseUp={handleMouseUp}
 
-            onMouseLeave={e=>{
-                isMouseDown = false;
-            }}
+            onMouseLeave={handleMouseLeave}
 
-            onMouseMove={e=>{
-                if(!isMouseDown) return;
-                const displacement:number = e.pageX - e.currentTarget.offsetLeft - mouseDownRelativeX;
-                e.currentTarget.scrollLeft = initialScrollLeft - displacement;
-            }}
+            onMouseMove={handleMouseMove}
             >
                 {cards}
             </div>

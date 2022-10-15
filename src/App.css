@@ -115,12 +115,12 @@ header .search-text {
   }
 
   header {
-    height: 6.95vh;
+    height: 11.54vh;
   }
 
   header .musica-logo {
-    /* width: 8.21vw; */
-    height: 2.78vh;
+    width: 8.21vw;
+    /* height: 2.78vh; */
     aspect-ratio: 1;
 
     margin-left: 6.521vw;
@@ -136,6 +136,7 @@ header .search-text {
   }
 
   .body-wrapper {
+    display: block;
     height: auto;
   }
 
