@@ -44,7 +44,10 @@ function PlaylistsRenderer() {
 
             <div className="top-charts" >
                 <div style={{color: "#EFEEE0", fontFamily: "Quicksand-Bold", fontSize: "24px"}} >Top Charts</div>
-                {chartCards}
+                <div className="chart-cards-container">
+                    {chartCards}
+                </div>
+                
             </div>
         </div>
     )
@@ -86,7 +89,6 @@ function HorizontallyLinedMusic(props: HorizontallyLinedMusicProps) {
     let initialScrollLeft:number;
 
     const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (e)=>{
-        console.log("mouse down")
         isMouseDown = true;
         e.preventDefault();
         mouseDownRelativeX = e.pageX - e.currentTarget.offsetLeft;
@@ -105,7 +107,6 @@ function HorizontallyLinedMusic(props: HorizontallyLinedMusicProps) {
         if(!isMouseDown) return;
         const displacement:number = e.pageX - e.currentTarget.offsetLeft - mouseDownRelativeX;
         e.currentTarget.scrollLeft = initialScrollLeft - displacement;
-        console.log(displacement)
     };
 
 
