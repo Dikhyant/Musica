@@ -35,6 +35,13 @@ header .search-icon {
   margin-left: 4.84vw;
 }
 
+header .search-text {
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+  margin-left: 1.56vw;
+  font-size: 14px;
+}
+
 /* <--------------------------------------------------------------------------------------------------------------------> */
 
 /* body */
@@ -74,6 +81,7 @@ header .search-icon {
   height: 15.26vh;
 
   margin-left: 1.56vw;
+  margin-top: 2.403vh;
 
   background-color: #1A1E1F;
   border-radius: 32px;
@@ -95,4 +103,47 @@ header .search-icon {
 
 .body-wrapper .nav-bar-wrapper .nav-bar .nav-bar-icon {
   width: 1.71vw;
+}
+
+@media screen and (max-width: 430px) {
+  .app {
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+  .body-wrapper .nav-bar-wrapper {
+    display: none;
+  }
+
+  header {
+    height: 6.95vh;
+  }
+
+  header .musica-logo {
+    /* width: 8.21vw; */
+    height: 2.78vh;
+    aspect-ratio: 1;
+
+    margin-left: 6.521vw;
+    margin-top: 1.88vh;
+  }
+
+  header .search-icon{
+    display: none;
+  }
+
+  header .search-text{
+    display: none;
+  }
+
+  .body-wrapper {
+    height: auto;
+  }
+
+  .body-wrapper .content-wrapper {
+    width: 100vw;
+    height: auto;
+    margin-left: 0;
+
+    overflow-y:visible;
+  }
 }

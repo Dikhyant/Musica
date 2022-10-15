@@ -10,7 +10,25 @@
 
     border-radius: 40px;
 
+    color: #ffffff;
+
+
     background-size: cover;
+}
+
+.homepage .playlist-container .currated-playlist .currated-playlist-text {
+    margin-top: 4.56vh;
+    margin-left: 3.51vw;
+
+    font-size: 12px;
+}
+
+.homepage .playlist-container .currated-playlist .playlist-name {
+    margin-top: 11.41vh;
+    margin-left: 3.51vw;
+
+    font-size: 35px;
+    font-family: Quicksand-Bold;
 }
 
 .chart-card {
@@ -32,11 +50,14 @@
 .chart-card .thumbnail-wrapper {
     align-content: center;
 
+    height: 65.625%;
+
     margin-left: 1.17vw;
 }
 
 .chart-card .thumbnail {
-    width: 4.92vw;
+    /* width: 4.92vw; */
+    height: 100%;
     aspect-ratio: 1;
 
     border-radius: 10px;
@@ -48,6 +69,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 14.84vw;
     height: 7.59vh;
 
     margin-left: 1.093vw;
@@ -59,6 +81,11 @@
 
 .chart-card .text-wrapper .playlist-runtime {
     font-size: 12px;
+}
+
+.chart-card .heart-icon-wrapper {
+    margin-left: 6vw;
+    margin-right: 1.64vw;
 }
 
 .chart-card .heart-icon-outer-ring {
@@ -86,17 +113,18 @@
 .horizontally-lined-music .heading {
     color: #EFEEE0;
     font-family: Quicksand-Bold;
+    font-size: 24px;
 }
 
 .horizontally-lined-music .music-wrapper {
     display: flex;
 
     width: 100%;
-    height: 25.96vh;
+    height: auto;
 
-    /* overflow-y: hidden; */
-    overflow-x: scroll;
-    -webkit-overflow-scrolling: touch;
+    margin-top: 1.44vh;
+
+    overflow-x: hidden;
 }
 
 .music-card .thumbnail {
@@ -108,11 +136,35 @@
 }
 
 .music-card .name {
+    margin-top: 1.081vh;
+
     color: #ffffff;
     font-size: 12px;
 }
 
 .music-card .artist-name {
+    margin-top: 1.081vh;
+
     color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
+}
+
+@media screen and (max-width: 430px) {
+    .homepage .playlist-container {
+        display: block;
+    }
+
+    .homepage .playlist-container .currated-playlist {
+        width: 88.64vw;
+        height: 41.12vh;
+
+        margin-left: 5.55vw;
+    
+        border-radius: 20px;
+    
+        color: #ffffff;
+    
+    
+        background-size: cover;
+    }
 }

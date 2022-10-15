@@ -21,7 +21,7 @@ function App() {
         <div>
           <img src={SearchIcon} alt="" className="search-icon" />
         </div>
-        <div style={{color: "rgba(255,255,255,0.25)", textAlign: "center"}}>
+        <div className="search-text" style={{color: "rgba(255,255,255,0.25)", textAlign: "center", marginLeft: "1.56vw", fontSize: "14px"}}>
           Search
         </div>
       </header>

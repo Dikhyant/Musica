@@ -4,7 +4,7 @@ export const playlists:Playlist[] = [
     {
         id: "1",
         name: "R & B Hits",
-        thumbnailUrl: "https://images.radiox.co.uk/images/74543?width=6720&crop=4_3&signature=4HpB7wpifXpJxqK1E35a_CUexdE=",
+        thumbnailUrl: "https://i.pinimg.com/originals/41/d4/4c/41d44c6a1202908758123455ca2bceb6.png",
         runtime: 2000,
         isLiked: true
     },

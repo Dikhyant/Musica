@@ -20,7 +20,7 @@ function ChartCard({playlist}:ChartCardProps) {
                 <div className="playlist-name" >{playlist.name}</div>
                 <div className="playlist-runtime">{playlist.runtime}</div>
             </div>
-            <div>
+            <div className="heart-icon-wrapper" >
                 <div className="heart-icon-outer-ring" >
                     <img src={HeartIcon} alt="H" className="heart-icon" />
                 </div>
@@ -38,10 +38,12 @@ function PlaylistsRenderer() {
     return(
         <div className="playlist-container" >
             <div className="currated-playlist" style={{backgroundImage: `url(${playlists[0].thumbnailUrl})`}} >
+                <div className="currated-playlist-text" >Currated playlist</div>
+                <div className="playlist-name" >{playlists[0].name}</div>
             </div>
 
             <div className="top-charts" >
-                <div style={{color: "#EFEEE0", fontFamily: "Quicksand-Bold"}} >Top Charts</div>
+                <div style={{color: "#EFEEE0", fontFamily: "Quicksand-Bold", fontSize: "24px"}} >Top Charts</div>
                 {chartCards}
             </div>
         </div>
@@ -51,6 +53,7 @@ function PlaylistsRenderer() {
 type HorizontallyLinedMusicProps = {
     heading: string;
     musicItems: MusicItem[];
+    style?: React.CSSProperties;
 }
 
 type CardProps = {
@@ -76,10 +79,36 @@ function HorizontallyLinedMusic(props: HorizontallyLinedMusicProps) {
         <div style={{width: "2.34vw", height: "5vh"}} ></div>
     </div>
         ))
+
+    let isMouseDown:boolean = false;
+    let mouseDownRelativeX:number;
+    let initialScrollLeft:number;
     return (
-        <div className="horizontally-lined-music" >
+        <div className="horizontally-lined-music" style={props.style} >
             <div className="heading" >{props.heading}</div>
-            <div className="music-wrapper">
+            <div className="music-wrapper" 
+            
+            onMouseDown={e=>{
+                isMouseDown = true;
+                e.preventDefault();
+                mouseDownRelativeX = e.pageX - e.currentTarget.offsetLeft;
+                initialScrollLeft = e.currentTarget.scrollLeft;
+            }} 
+            
+            onMouseUp={e=>{
+                isMouseDown = false;
+            }}
+
+            onMouseLeave={e=>{
+                isMouseDown = false;
+            }}
+
+            onMouseMove={e=>{
+                if(!isMouseDown) return;
+                const displacement:number = e.pageX - e.currentTarget.offsetLeft - mouseDownRelativeX;
+                e.currentTarget.scrollLeft = initialScrollLeft - displacement;
+            }}
+            >
                 {cards}
             </div>
         </div>
@@ -91,8 +120,8 @@ export default class HomePage extends React.Component {
         return (
             <div className="homepage" >
                 <PlaylistsRenderer />
-                <HorizontallyLinedMusic heading="New releases." musicItems={albums} />
-                <HorizontallyLinedMusic heading="Popular in your area" musicItems={albums} />
+                <HorizontallyLinedMusic heading="New releases." musicItems={albums} style={{marginTop: "6.129vh"}} />
+                <HorizontallyLinedMusic heading="Popular in your area" musicItems={albums} style={{marginTop: "5.408vh"}} />
             </div>
         )
     }
