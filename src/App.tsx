@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes , Route , Link } from "react-router-dom";
+import { Route , Link , useHistory } from "react-router-dom";
 import './App.css';
 
 import MusicaLogo from "./Logo/musica_logo.svg";
@@ -20,19 +20,30 @@ type NavBtnProp = {
   route:string;
   icon:string;
   label:string;
+  history?: any;
 }
 
 function NavBtn(props: NavBtnProp) {
+  let isActive:boolean = props.history?.location.pathname === props.route;
+  props.history?.listen((location: any) => {
+    console.log({answer: location.pathname === props.route});
+    isActive = location.pathname === props.route;
+  })
+
   return (
     <Link to={props.route} className="nav-btn" style={{color: "rgba( 239, 238, 224, 0.25)"}} >
       <div><img src={props.icon} alt="I" className="nav-bar-icon" /></div>
-      <div className="nav-btn-label" >{props.label}</div>
+      <div className="nav-btn-label" style={{color: `${isActive ? "#ffffff" : "#000000"}`}} >{props.label}</div>
     </Link>
   )
 }
 
 
 function App() {
+  const history = useHistory();
+  history.listen((location) => {
+    console.log({location: location});
+  })
   return (
     <div className="app">
       <header>
@@ -67,17 +78,15 @@ function App() {
 
 
         <div className="content-wrapper">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/my-collections" element={<MyCollections />} />
-          </Routes>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/my-collections" component={MyCollections} />
         </div>
       </div>
 
       <div className="nav-drawer-mobile">
         <div></div>
-        <NavBtn icon={HomeIcon} label="Home" route={"/"+routes.HOME} />
-        <NavBtn icon={PlaylistIcon} label="My collections" route={"/"+routes.MY_COLLECTIONS} />
+        <NavBtn icon={HomeIcon} label="Home" route={"/"+routes.HOME} history={history} />
+        <NavBtn icon={PlaylistIcon} label="My collections" route={"/"+routes.MY_COLLECTIONS} history={history} />
         <NavBtn icon={RadioIcon} label="Radio" route="/" />
         <NavBtn icon={VideoIcon} label="Music videos" route="/" />
         <NavBtn icon={ProfileIcon} label="Profile" route="/" />

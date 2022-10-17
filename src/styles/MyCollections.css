@@ -74,3 +74,21 @@
 .my-collections .card:hover .play-icon {
     opacity: 1;
 }
+
+@media screen and (max-width: 430px) {
+    .my-collections .music-item-container {
+        grid-template-columns: auto;
+        grid-auto-flow: row;
+        justify-content: center;
+    }
+
+    .my-collections .card {
+        width: 86.71vw;
+        height: 31.79vh;
+        /* aspect-ratio: 359 / 234; */
+    }
+
+    .my-collections .card .name {
+        margin-top: 53.84%;
+    }
+}

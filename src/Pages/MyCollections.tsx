@@ -12,7 +12,6 @@ type CardProps = {
 }
 
 function Card(props: CardProps) {
-    console.log({backgroundImage: props.thumbnailUrl});
     return (
         <div className="card" style={{backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0), rgba(15, 18, 19, 0.85)) , url(${props.thumbnailUrl})`}} >
             <div className="name" >{props.name}</div>
