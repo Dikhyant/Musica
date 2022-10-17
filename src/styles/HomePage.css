@@ -77,6 +77,8 @@
 
 .chart-card .text-wrapper .playlist-name {
     font-size: 17px;
+
+    overflow: hidden;
 }
 
 .chart-card .text-wrapper .playlist-runtime {
@@ -161,7 +163,9 @@
 
 @media screen and (max-width: 430px) {
     .homepage .playlist-container .currated-playlist .currated-playlist-text {
-        /* margin-top: 6.95vh; */
+        margin-top: 0;
+        margin-left: 7.97vw;
+        padding-top: 6.95vh;
     }
     .homepage .playlist-container {
         display: block;
@@ -179,6 +183,11 @@
     
     
         background-size: cover;
+    }
+
+    .homepage .playlist-container .currated-playlist .playlist-name {
+        margin-top: 33.28vh;
+        margin-left: 7.97vw;
     }
 
     .playlist-container .top-charts {

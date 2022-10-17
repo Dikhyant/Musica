@@ -1,0 +1,76 @@
+.my-collections .tab-btn-container {
+    display: flex;
+}
+
+.my-collections .music-item-container {
+    display: grid;
+    grid-template-columns: repeat(4 , 16.64vw);
+    column-gap: 1.79vw;
+    row-gap: 2.76vh;
+}
+
+.my-collections .card {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 213/234;
+
+    border-radius: 20px;
+    
+    color: #EFEEE0;
+
+    background-size: 100%;
+
+    transition-property: background-size;
+    transition-duration: 800ms;
+    /* background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(15, 18, 19, 0.85)); */
+}
+
+.my-collections .card:hover {
+    background-size: 150%;
+}
+
+.my-collections .card .name {  
+    width: 88.5%;
+    height: 12.4%;
+
+    margin-top: 72.64%;
+    margin-left: 8.92%;
+
+    font-size: 24px;
+
+    overflow: hidden;
+
+    transition-property: margin-top;
+    transition-duration: 800ms;
+}
+
+.my-collections .card:hover .name{
+    margin-top: calc(72.64% - 15.81%);
+}
+
+.my-collections .card .artist-name {
+    margin-left: 8.92%;
+
+    font-size: 10px;
+}
+
+.my-collections .card .play-icon {
+    position: absolute;
+    /* transform: translate(68.54%, 67.94%); */
+
+    top: 67.94%;
+    left: 68.54%;
+
+    width: 22.53%;
+    aspect-ratio: 1;
+
+    opacity: 0;
+
+    transition-property: opacity;
+    transition-duration: 800ms;
+}
+
+.my-collections .card:hover .play-icon {
+    opacity: 1;
+}

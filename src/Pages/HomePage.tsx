@@ -6,6 +6,17 @@ import { Playlist, MusicItem } from "../utils/Interfaces";
 
 import HeartIcon from "../icons/Heart_icon.svg";
 
+const toHHMMSS = (seconds: number) => {
+    var hours   = Math.floor(seconds / 3600)
+    var minutes = Math.floor(seconds / 60) % 60
+    seconds = seconds % 60
+
+    return [hours,minutes,seconds]
+        .map(v => v < 10 ? "0" + v : v)
+        .filter((v,i) => v !== "00" || i > 0)
+        .join(":")
+}
+
 type ChartCardProps = {
     playlist: Playlist
 }
@@ -18,7 +29,7 @@ function ChartCard({playlist}:ChartCardProps) {
             </div>
             <div className="text-wrapper">
                 <div className="playlist-name" >{playlist.name}</div>
-                <div className="playlist-runtime">{playlist.runtime}</div>
+                <div className="playlist-runtime">{toHHMMSS(playlist.runtime)}</div>
             </div>
             <div className="heart-icon-wrapper" >
                 <div className="heart-icon-outer-ring" >

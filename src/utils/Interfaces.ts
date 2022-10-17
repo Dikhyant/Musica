@@ -2,7 +2,7 @@ export interface MusicItem {
     id: string;
     name:string;
     thumbnailUrl:string;
-    runtime:number;
+    runtime:number; //seconds
     isLiked:boolean;
     artistName?:string;
 }

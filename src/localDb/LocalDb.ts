@@ -12,7 +12,7 @@ export const playlists:Playlist[] = [
         id: "2",
         name: "Golden age of 80s",
         thumbnailUrl: "https://pyxis.nymag.com/v1/imgs/fdd/43e/42b2dc665cfb6a31f0368e9afc456b392b-25-80s-tv.rsquare.w700.jpg",
-        runtime: 2000,
+        runtime: 4000,
         isLiked: false
     },
     {
