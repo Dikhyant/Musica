@@ -63,9 +63,7 @@ function App() {
   return (
     <div className="app">
       <header>
-        <div>
           <img src={MusicaLogo} alt="" className="musica-logo" />
-        </div>
         <div className="search-icon-wrapper">
           <img src={SearchIcon} alt="" className="search-icon" />
         </div>
@@ -100,15 +98,7 @@ function App() {
         </div>
       </div>
 
-      {/* <div className="nav-drawer-mobile">
-        <div></div>
-        <NavBtn icon={HomeIcon} activeStateIcon={HomeActiveIcon} label="Home" route={"/"+routes.HOME} history={history} />
-        <NavBtn icon={PlaylistIcon} activeStateIcon={PlaylistActiveIcon} label="My collections" route={"/"+routes.MY_COLLECTIONS} history={history} />
-        <NavBtn icon={RadioIcon} activeStateIcon={RadioActiveIcon} label="Radio" route="/" />
-        <NavBtn icon={VideoIcon} activeStateIcon={VideoActiveIcon} label="Music videos" route="/" />
-        <NavBtn icon={ProfileIcon} label="Profile" route="/" />
-        <NavBtn icon={LogoutIcon} label="Log out" route="/" />
-      </div> */}
+      <div className="background"></div>
     </div>
   );
 }

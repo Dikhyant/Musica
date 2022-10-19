@@ -11,11 +11,23 @@
 .app {
   width: 100vw;
   height: 100vh;
-  background-color: #1D2123;
+  /* background-color: #1D2123; */
 
   font-family: Quicksand-Regular;
 
   overflow: hidden;
+}
+
+.app .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -5;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #1D2123;
 }
 
 header {

@@ -1,12 +1,28 @@
 import React from "react";
+import { Song } from "../utils/Interfaces";
 
 import "../styles/Playlist.css";
 
 import PlayAllIcon from "../icons/play_all_icon.svg";
 import AddToCollectionIcon from "../icons/add_to_collection_icon.svg";
+import RedHeartIcon from "../icons/Red_Heart_icon.svg";
+import { songs } from "../localDb/LocalDb";
+
+type StrapComponentProps = {
+    song: Song;
+}
+
+function StrapComponent(props: StrapComponentProps) {
+    return (
+        <div className="strap">
+
+        </div>
+    )
+}
 
 export default class Playlist extends React.Component {
     render(): React.ReactNode {
+        const songsComponents = songs.map((item)=>(<StrapComponent song={item}  />))
         return (
             <div className="playlist" >
                 <div className="lead-info-container">
@@ -25,10 +41,18 @@ export default class Playlist extends React.Component {
                                 <img src={AddToCollectionIcon} alt="I" className="icon" />
                                 <div className="text">Add to collection</div>
                             </div>
-                            <div className="like-btn"></div>
+                            <div className="like-btn">
+                                <img src={RedHeartIcon} alt="I" className="icon" />
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div className="song-item-container" >
+                    {songsComponents}
+                </div>
+
+                <div className="background" style={{backgroundImage: ` linear-gradient(to bottom, rgba( 29, 33, 35, 0.8) , rgba( 29, 33, 35, 1)) , url(https://ilogo.in/ajax/thumbnail.php?id=106094&width=540&height=540&face=front&force=1)`}} ></div>
             </div>
         )
     }

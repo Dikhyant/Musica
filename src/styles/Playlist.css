@@ -1,3 +1,16 @@
+.playlist .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -3;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #ffffff;
+    background-size: cover;
+}
+
 .playlist .lead-info-container {
     display: flex;
 }
@@ -10,6 +23,11 @@
     border-radius: 35.17px;
 }
 
+.playlist .lead-info-container .other-things {
+    margin-left: 2.109vw;
+    margin-top: 12.13vh;
+}
+
 .playlist .lead-info-container .other-things .name {
     font-family: Quicksand-Bold;
     font-size: 35px;
@@ -17,13 +35,18 @@
 }
 
 .playlist .lead-info-container .other-things .info {
+    margin-top: 2.28vh;
+
     width: 41.17vw;
+    aspect-ratio: 526.976 / 29;
 
     color: #EFEEE0;
 }
 
 .playlist .lead-info-container .other-things .btns-container {
     display: flex;
+
+    margin-top: 8.29vh;
 }
 
 .playlist .lead-info-container .other-things .btns-container .play-all-btn {
@@ -58,6 +81,8 @@
     width: 11.79vw;
     aspect-ratio: 151 / 36;
 
+    margin-left: 0.703vw;
+
     border-radius: 32px;
 
     background-color: rgba( 255, 255, 255, 0.07);
@@ -72,4 +97,38 @@
     color: #ffffff;
 
     font-size: 12px;
+}
+
+.playlist .lead-info-container .other-things .btns-container .like-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 2.8125vw;
+    aspect-ratio: 1;
+
+    margin-left: 0.703vw;
+
+    border-radius: 50%;
+
+    background-color: rgba( 255, 255, 255, 0.07);
+}
+
+/* ------------------------------------------------------------------------------------------------------------- */
+
+.song-item-container {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 1.201vh;
+    
+    margin-top: 5.88vh;
+}
+
+.strap {
+    width: 87.89vw;
+    aspect-ratio: 1125 / 56;
+
+    border-radius: 15px;
+
+    background-color: rgba( 51, 55, 59, 0.37);
 }
