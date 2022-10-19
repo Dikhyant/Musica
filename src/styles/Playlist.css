@@ -1,0 +1,75 @@
+.playlist .lead-info-container {
+    display: flex;
+}
+
+.playlist .lead-info-container .lead-image {
+    display: block;
+    width: 22.18vw;
+    aspect-ratio: 284 / 288.97;
+
+    border-radius: 35.17px;
+}
+
+.playlist .lead-info-container .other-things .name {
+    font-family: Quicksand-Bold;
+    font-size: 35px;
+    color: #A4C7C6;
+}
+
+.playlist .lead-info-container .other-things .info {
+    width: 41.17vw;
+
+    color: #EFEEE0;
+}
+
+.playlist .lead-info-container .other-things .btns-container {
+    display: flex;
+}
+
+.playlist .lead-info-container .other-things .btns-container .play-all-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 6.79vw;
+    aspect-ratio: 87 / 36;
+
+    border-radius: 32px;
+
+    background-color: rgba( 255, 255, 255, 0.07);
+}
+
+.playlist .lead-info-container .other-things .btns-container .play-all-btn .play-all-icon {
+    width: 18.39%;
+    aspect-ratio: 1;
+}
+
+.playlist .lead-info-container .other-things .btns-container .play-all-btn .play-all-text {
+    font-size: 12px;
+
+    color: #ffffff;
+}
+
+.playlist .lead-info-container .other-things .btns-container .add-to-collection-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 11.79vw;
+    aspect-ratio: 151 / 36;
+
+    border-radius: 32px;
+
+    background-color: rgba( 255, 255, 255, 0.07);
+}
+
+.playlist .lead-info-container .other-things .btns-container .add-to-collection-btn .icon {
+    width: 10.59%;
+    aspect-ratio: 1;
+}
+
+.playlist .lead-info-container .other-things .btns-container .add-to-collection-btn .text {
+    color: #ffffff;
+
+    font-size: 12px;
+}

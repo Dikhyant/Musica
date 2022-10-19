@@ -1,10 +1,12 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "../styles/HomePage.css";
 
 import { albums, playlists } from "../localDb/LocalDb";
 import { Playlist, MusicItem } from "../utils/Interfaces";
 
 import HeartIcon from "../icons/Heart_icon.svg";
+import { routes } from "../utils/navigationData";
 
 const toHHMMSS = (seconds: number) => {
     var hours   = Math.floor(seconds / 3600)
@@ -22,8 +24,11 @@ type ChartCardProps = {
 }
 
 function ChartCard({playlist}:ChartCardProps) {
+    const history = useHistory();
     return (
-        <div className="chart-card" >
+        <div className="chart-card" onClick={()=>{
+            history.push("/" + routes.PLAYLIST + "/" + playlist.id)
+        }} >
             <div className="thumbnail-wrapper">
                 <img src={playlist.thumbnailUrl} alt="T" className="thumbnail" />
             </div>

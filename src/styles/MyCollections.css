@@ -2,11 +2,45 @@
     display: flex;
 }
 
+.my-collections .tab-btn-container .my-collection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 9.375vw;
+    aspect-ratio: 120 / 37;
+
+    border-radius: 27px;
+
+    color: #1D2123;
+    background-color: #FACD66;
+}
+
+.my-collections .tab-btn-container .likes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 6.5625vw;
+    aspect-ratio: 84 / 37;
+
+    margin-left: 0.781vw;
+
+    color: #EFEEE0;
+
+    border-width: 1px;
+    border-radius: 27px;
+    border-color: #EFEEE0;
+    border-style: solid;
+}
+
 .my-collections .music-item-container {
     display: grid;
     grid-template-columns: repeat(4 , 16.64vw);
     column-gap: 1.79vw;
     row-gap: 2.76vh;
+
+    margin-top: 3.125vh;
 }
 
 .my-collections .card {

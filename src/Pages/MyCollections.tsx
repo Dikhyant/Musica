@@ -29,8 +29,8 @@ export default class MyCollections extends React.Component {
         return (
             <div className="my-collections">
                 <div className="tab-btn-container">
-                    <div></div>
-                    <div></div>
+                    <div className="my-collection"><div>My collection</div></div>
+                    <div className="likes" ><div>Likes</div></div>
                 </div>
 
                 <div className="music-item-container">
