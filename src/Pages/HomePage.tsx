@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 import "../styles/HomePage.css";
 
-import { albums, playlists } from "../localDb/LocalDb";
+import { playlists } from "../localDb/LocalDb";
 import { Playlist, MusicItem } from "../utils/Interfaces";
 
 import HeartIcon from "../icons/Heart_icon.svg";
 import { routes } from "../utils/navigationData";
+import { api, backendUrl } from "../utils/Networks";
+import { useStore } from "../utils/Store";
 
 const toHHMMSS = (seconds: number) => {
     var hours   = Math.floor(seconds / 3600)
@@ -48,6 +51,13 @@ function ChartCard({playlist}:ChartCardProps) {
 function PlaylistsRenderer() {
     if(playlists.length === 0) return(<></>);
     let chartCards = [];
+
+    axios.get(backendUrl + "/" + api.ALBUMS)
+    .then(response => {
+        console.log("Response data");
+        console.log(response.data);
+    })
+
     for(let i = 1; i < ( 4 < playlists.length ? 4 : playlists.length); i++) {
         chartCards[i] = <ChartCard playlist={playlists[i]} />
     }
@@ -81,8 +91,19 @@ type CardProps = {
 }
 
 function Card(props: CardProps) {
+    function handleOnClick() {
+        axios.get(backendUrl + "/" + api.SONGS + "?albumId=" + props.musicItem.id)
+        .then( response => {
+            console.log("Songs");
+            console.log(response.data);
+        } )
+        .catch(error => {
+            console.error(error);
+        })
+    }
+
     return (
-        <div className="music-card" >
+        <div className="music-card" onClick={handleOnClick} >
             <div>
                 <img src={props.musicItem.thumbnailUrl} alt="T" className="thumbnail" />
             </div>
@@ -145,14 +166,27 @@ function HorizontallyLinedMusic(props: HorizontallyLinedMusicProps) {
     )
 }
 
-export default class HomePage extends React.Component {
-    render(): React.ReactNode {
-        return (
-            <div className="homepage" >
-                <PlaylistsRenderer />
-                <HorizontallyLinedMusic heading="New releases." musicItems={albums} style={{marginTop: "6.129vh"}} />
-                <HorizontallyLinedMusic heading="Popular in your area" musicItems={albums} style={{marginTop: "5.408vh"}} />
-            </div>
-        )
-    }
+export default function HomePage() {
+    const albumData = useStore(state => state.albums);
+    const addAlbums = useStore(state => state.addAlbums);
+
+    useEffect(()=>{
+        if(albumData.length !== 0) return;
+
+        axios.get(backendUrl + "/" + api.ALBUMS)
+        .then(response => {
+            addAlbums(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    } , [])
+    return (
+        <div className="homepage" >
+            <PlaylistsRenderer />
+            <HorizontallyLinedMusic heading="New releases." musicItems={albumData} style={{marginTop: "6.129vh"}} />
+            <HorizontallyLinedMusic heading="Popular in your area" musicItems={albumData} style={{marginTop: "5.408vh"}} />
+        </div>
+    )
 }

@@ -18,3 +18,10 @@ export interface Album extends MusicItem {
 export interface Playlist extends MusicItem {
     
 }
+
+export interface IStore {
+    albums: Album[],
+    songs: Song[],
+    addAlbums: (albums: Album[]) => void,
+    addSongs: (songs: Song[]) => void,
+}
