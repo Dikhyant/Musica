@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import { Route , Link , useHistory } from "react-router-dom";
+import { Route , Link , useHistory, useParams } from "react-router-dom";
 import './App.css';
 
 import MusicaLogo from "./Logo/musica_logo.svg";
@@ -19,8 +19,11 @@ import VideoActiveIcon from "./icons/videos_active_icon.svg";
 
 import HomePage from './Pages/HomePage';
 import MyCollections from './Pages/MyCollections';
-import { routes } from './utils/navigationData';
+import { routeParams, routes } from './utils/navigationData';
 import Playlist from './Pages/Playlist';
+import { useStore } from './utils/Store';
+import axios from 'axios';
+import { api, backendUrl } from './utils/Networks';
 
 type NavBtnProp = {
   route:string;
@@ -57,9 +60,19 @@ function NavBtn(props: NavBtnProp) {
 
 function App() {
   const history = useHistory();
+  
   history.listen((location) => {
     console.log({location: location});
   })
+
+  /*
+  const audioPlayer: HTMLAudioElement = document.getElementById("audio-player") as HTMLAudioElement;
+  audioPlayer.play();
+  audioPlayer.currentTime = 0 / 100 * audioPlayer.duration;
+  audioPlayer.volume = 1;
+  */
+
+  
   return (
     <div className="app">
       <header>
@@ -94,8 +107,16 @@ function App() {
         <div className="content-wrapper">
             <Route exact path={"/" + routes.HOME} component={HomePage} />
             <Route exact path={"/" + routes.MY_COLLECTIONS} component={MyCollections} />
-            <Route exact path={"/" + routes.PLAYLIST + "/:id"} component={Playlist} />
+            <Route exact path={"/" + routes.PLAYLIST + "/:" + routeParams.ID} component={Playlist} />
         </div>
+      </div>
+
+      <audio id="audio-player">
+        <source src='https://hitzop.com/wp-content/uploads/2021/08/Linkin_Park_-_New_Divide.mp3' />
+      </audio>
+
+      <div className="music-player">
+
       </div>
 
       <div className="background"></div>

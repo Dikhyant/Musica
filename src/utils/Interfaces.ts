@@ -20,8 +20,8 @@ export interface Playlist extends MusicItem {
 }
 
 export interface IStore {
-    albums: Album[],
-    songs: Song[],
+    albums: Map<string, Album>,
+    groupIdToSongsMap: Map<string, Song[]>,
     addAlbums: (albums: Album[]) => void,
-    addSongs: (songs: Song[]) => void,
+    addSongsToGroup: (id:string , songs: Song[]) => void,
 }

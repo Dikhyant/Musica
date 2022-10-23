@@ -1,12 +1,30 @@
-import React from "react";
-import { Song } from "../utils/Interfaces";
+import React, { useEffect } from "react";
+import { Album, Song } from "../utils/Interfaces";
 
 import "../styles/Playlist.css";
 
 import PlayAllIcon from "../icons/play_all_icon.svg";
 import AddToCollectionIcon from "../icons/add_to_collection_icon.svg";
 import RedHeartIcon from "../icons/Red_Heart_icon.svg";
-import { songs } from "../localDb/LocalDb";
+import WhiteOutlineHeartIcon from "../icons/White_Outline_Heart_icon.svg";
+import ThreeDotsIcon from "../icons/Three_dots_icon.svg";
+
+// import { songs } from "../localDb/LocalDb";
+import { useParams } from "react-router";
+import { useStore } from "../utils/Store";
+import axios from "axios";
+import { api, backendUrl } from "../utils/Networks";
+
+const toHHMMSS = (seconds: number) => {
+    var hours   = Math.floor(seconds / 3600)
+    var minutes = Math.floor(seconds / 60) % 60
+    seconds = seconds % 60
+
+    return [hours,minutes,seconds]
+        .map(v => v < 10 ? "0" + v : v)
+        .filter((v,i) => v !== "00" || i > 0)
+        .join(":")
+}
 
 type StrapComponentProps = {
     song: Song;
@@ -15,45 +33,77 @@ type StrapComponentProps = {
 function StrapComponent(props: StrapComponentProps) {
     return (
         <div className="strap">
-
+            <img src={props.song.thumbnailUrl} alt="I" className="thumbnail" />
+            <img src={WhiteOutlineHeartIcon} alt="I" className="heart_icon" />
+            <div className="name">{props.song.name}</div>
+            <div className="artist-name-wrapper">
+                <div className="artist-name">{props.song.artistName}</div>
+            </div>
+            <div className="runtime">{toHHMMSS(props.song.runtime)}</div>
+            <img src={ThreeDotsIcon} alt="I" className="three-dots-icon" />
         </div>
     )
 }
 
-export default class Playlist extends React.Component {
-    render(): React.ReactNode {
-        const songsComponents = songs.map((item)=>(<StrapComponent song={item}  />))
-        return (
-            <div className="playlist" >
-                <div className="lead-info-container">
-                    <img src="https://ilogo.in/ajax/thumbnail.php?id=106094&width=540&height=540&face=front&force=1" alt="I" className="lead-image" />
+export default function Playlist() {
+    const { id } = useParams<{id: string}>();
+    const album: Album = useStore(state => state.albums.get(id)) as Album;
+    const groupIdToSongsMap = useStore( state => state.groupIdToSongsMap );
+    const songs = groupIdToSongsMap.get(id) as Song[];
+    const addSongsToGroup = useStore(state => state.addSongsToGroup);
 
-                    <div className="other-things">
-                        <div className="name">Tomorrow’s tunes</div>
-                        <div className="info">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis</div>
-                        <div className="btns-container">
-                            <div className="play-all-btn">
-                                <img src={PlayAllIcon} alt="I" className="play-all-icon" />
-                                <div className="play-all-text">Play all</div>
-                            </div>
+    var songsComponents: JSX.Element[] = [];
+    if(songs !== undefined && songs.length !== 0) {
+        songsComponents = songs.map((item)=>(<StrapComponent song={item}  />))
+    } else {
+        axios.get(backendUrl + "/" + api.SONGS + "?albumId=" + id)
+        .then( response => {
+            console.log("Songs");
+            console.log(response.data);
+            addSongsToGroup( id, response.data);
+        } )
+        .catch(error => {
+            console.error(error);
+        })
+    }
 
-                            <div className="add-to-collection-btn">
-                                <img src={AddToCollectionIcon} alt="I" className="icon" />
-                                <div className="text">Add to collection</div>
-                            </div>
-                            <div className="like-btn">
-                                <img src={RedHeartIcon} alt="I" className="icon" />
-                            </div>
+    let albumThumbnailUrl:string = "";
+    let albumName:string = "";
+    if(album !== undefined) {
+        albumThumbnailUrl = album.thumbnailUrl;
+        albumName = album.name;
+    }
+
+    return (
+        <div className="playlist" >
+            <div className="lead-info-container">
+                <img src={albumThumbnailUrl} alt="I" className="lead-image" />
+
+                <div className="other-things">
+                    <div className="name">{albumName}</div>
+                    <div className="info">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis</div>
+                    <div className="btns-container">
+                        <div className="play-all-btn">
+                            <img src={PlayAllIcon} alt="I" className="play-all-icon" />
+                            <div className="play-all-text">Play all</div>
+                        </div>
+
+                        <div className="add-to-collection-btn">
+                            <img src={AddToCollectionIcon} alt="I" className="icon" />
+                            <div className="text">Add to collection</div>
+                        </div>
+                        <div className="like-btn">
+                            <img src={RedHeartIcon} alt="I" className="icon" />
                         </div>
                     </div>
                 </div>
-
-                <div className="song-item-container" >
-                    {songsComponents}
-                </div>
-
-                <div className="background" style={{backgroundImage: ` linear-gradient(to bottom, rgba( 29, 33, 35, 0.8) , rgba( 29, 33, 35, 1)) , url(https://ilogo.in/ajax/thumbnail.php?id=106094&width=540&height=540&face=front&force=1)`}} ></div>
             </div>
-        )
-    }
+
+            <div className="song-item-container" >
+                {songsComponents}
+            </div>
+
+            <div className="background" style={{backgroundImage: ` linear-gradient(to bottom, rgba( 29, 33, 35, 0.8) , rgba( 29, 33, 35, 1)) , url(${albumThumbnailUrl})`}} ></div>
+        </div>
+    )
 }

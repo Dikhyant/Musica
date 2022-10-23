@@ -125,10 +125,60 @@
 }
 
 .strap {
+    display: flex;
+    align-items: center;
     width: 87.89vw;
     aspect-ratio: 1125 / 56;
 
     border-radius: 15px;
 
+    color: #ffffff;
     background-color: rgba( 51, 55, 59, 0.37);
+}
+
+.strap .thumbnail {
+    height: 69.64%;
+    aspect-ratio: 1;
+
+    margin-left: 0.88%;
+
+    border-radius: 8.53px;
+}
+
+.strap .heart_icon {
+    height: 35.71%;
+    aspect-ratio: 1;
+
+    margin-left: 1.77%;
+}
+
+.strap .name {
+    width: 16.88%;
+
+    margin-left: 6.84%;
+
+    font-size: 12px;
+}
+
+.strap .artist-name-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 34.66%;
+}
+
+.strap .artist-name-wrapper .artist-name {
+    font-size: 12px;
+}
+
+.strap .runtime {
+    margin-left: 10.57%;
+
+    font-size: 12px;
+}
+
+.strap .three-dots-icon {
+    height: 29.5%;
+    aspect-ratio: 1;
+
+    margin-left: 17.06%;
 }

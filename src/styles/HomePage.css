@@ -160,6 +160,10 @@
     font-size: 12px;
 }
 
+.music-card:hover {
+    cursor: pointer;
+}
+
 .gap-btw-cards {
     width: 2.34vw;
     height: 5vh;

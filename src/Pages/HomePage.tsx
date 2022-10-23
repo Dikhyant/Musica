@@ -4,7 +4,7 @@ import axios from "axios";
 import "../styles/HomePage.css";
 
 import { playlists } from "../localDb/LocalDb";
-import { Playlist, MusicItem } from "../utils/Interfaces";
+import { Playlist, MusicItem, Album } from "../utils/Interfaces";
 
 import HeartIcon from "../icons/Heart_icon.svg";
 import { routes } from "../utils/navigationData";
@@ -91,11 +91,21 @@ type CardProps = {
 }
 
 function Card(props: CardProps) {
-    function handleOnClick() {
+    const songs = (useStore( state => state.groupIdToSongsMap )).get(props.musicItem.id);
+    const addSongsToGroup = useStore(state => state.addSongsToGroup);
+
+    const history = useHistory();
+
+    function handleOnClick() {   
+        history.push("/" + routes.PLAYLIST + "/" + props.musicItem.id);
+
+        if(songs?.length !== 0) return;
+
         axios.get(backendUrl + "/" + api.SONGS + "?albumId=" + props.musicItem.id)
         .then( response => {
             console.log("Songs");
             console.log(response.data);
+            addSongsToGroup( props.musicItem.id, response.data);
         } )
         .catch(error => {
             console.error(error);
@@ -170,8 +180,13 @@ export default function HomePage() {
     const albumData = useStore(state => state.albums);
     const addAlbums = useStore(state => state.addAlbums);
 
+    let albums: Album[] = new Array<Album>();
+    albumData.forEach((album: Album) => {
+        albums.push(album);
+    })
+
     useEffect(()=>{
-        if(albumData.length !== 0) return;
+        if(albumData.values.length !== 0) return;
 
         axios.get(backendUrl + "/" + api.ALBUMS)
         .then(response => {
@@ -185,8 +200,8 @@ export default function HomePage() {
     return (
         <div className="homepage" >
             <PlaylistsRenderer />
-            <HorizontallyLinedMusic heading="New releases." musicItems={albumData} style={{marginTop: "6.129vh"}} />
-            <HorizontallyLinedMusic heading="Popular in your area" musicItems={albumData} style={{marginTop: "5.408vh"}} />
+            <HorizontallyLinedMusic heading="New releases." musicItems={albums} style={{marginTop: "6.129vh"}} />
+            <HorizontallyLinedMusic heading="Popular in your area" musicItems={albums} style={{marginTop: "5.408vh"}} />
         </div>
     )
 }

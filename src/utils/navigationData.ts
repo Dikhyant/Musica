@@ -4,6 +4,10 @@ export const routes = {
     PLAYLIST: "playlist",
 }
 
+export const routeParams = {
+    ID: "id"
+}
+
 export type NavBtnInfo = {
     icon: string,
     activeStateIcon: string,
