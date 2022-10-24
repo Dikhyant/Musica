@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React , { useEffect, useRef, useState } from 'react';
 import { Route , Link , useHistory, useParams } from "react-router-dom";
 import './App.css';
 
@@ -60,19 +60,17 @@ function NavBtn(props: NavBtnProp) {
 
 function App() {
   const history = useHistory();
-  
-  history.listen((location) => {
-    console.log({location: location});
-  })
 
-  /*
-  const audioPlayer: HTMLAudioElement = document.getElementById("audio-player") as HTMLAudioElement;
-  audioPlayer.play();
-  audioPlayer.currentTime = 0 / 100 * audioPlayer.duration;
-  audioPlayer.volume = 1;
-  */
+  const seekRef = useRef<HTMLInputElement>(null);
+  const audioPlayerRef = useRef<HTMLAudioElement>(null);
+  audioPlayerRef.current?.play();
 
-  
+  const handleOnChangeSeek:React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    console.log({value: e.currentTarget.value});
+    if(audioPlayerRef !== null && audioPlayerRef.current !== null)
+      audioPlayerRef.current.currentTime = parseFloat(e.currentTarget.value) / 100.0  * audioPlayerRef.current.duration;
+  }
+
   return (
     <div className="app">
       <header>
@@ -111,12 +109,33 @@ function App() {
         </div>
       </div>
 
-      <audio id="audio-player">
-        <source src='https://hitzop.com/wp-content/uploads/2021/08/Linkin_Park_-_New_Divide.mp3' />
-      </audio>
+      
 
       <div className="music-player">
+        <div className="thumbnail-and-label-container" >
+          <img src="https://i.scdn.co/image/ab67616d0000b27338c9d97aebb93ebaf060c393" alt="I" className="thumbnail" />
+          <div className="label-container">
+            <div className="name">O mere khuda</div>
+            <div className="artist-name">Atif Aslam</div>
+          </div>
+        </div>
 
+        <div className="controller-container" >
+          <div className="btn-container"></div>
+          <div className="seek-container">
+            <input ref={seekRef} type="range" className="seek" onChange={handleOnChangeSeek} min={0} max={1} />
+            
+          </div>
+        </div>
+
+        <div className="volume-container" ></div>
+
+        <audio id="audio-player" ref={audioPlayerRef} onPlaying={(e) => {
+          if(seekRef !== null && seekRef.current !== null)
+            seekRef.current.value = e.currentTarget.currentTime / e.currentTarget.duration + "";
+        }}>
+          <source src='https://hitzop.com/wp-content/uploads/2021/08/Linkin_Park_-_New_Divide.mp3' />
+        </audio>
       </div>
 
       <div className="background"></div>

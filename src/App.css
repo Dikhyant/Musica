@@ -142,6 +142,9 @@ header .hamburger-icon-wrapper {
 .music-player {
   position: absolute;
   bottom: 0;
+
+  display: flex;
+
   width: 100vw;
   aspect-ratio: 1292 / 125;
 
@@ -150,6 +153,101 @@ header .hamburger-icon-wrapper {
   background-color: rgba( 29, 33, 35, 0.3);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+}
+
+.music-player .thumbnail-and-label-container {
+  display: flex;
+  align-items: center;
+
+  width: 15%;
+  height: 100%;
+}
+
+.music-player .thumbnail-and-label-container .thumbnail {
+  height: 39.2%;
+  aspect-ratio: 1;
+
+  border-radius: 14px;
+}
+
+.music-player .thumbnail-and-label-container .label-container {
+  font-family: Quicksand-Bold;
+}
+
+.music-player .thumbnail-and-label-container .label-container .name {
+  color: #ffffff;
+
+  font-size: 14px;
+}
+
+.music-player .thumbnail-and-label-container .label-container .artist-name {
+  color: rgba( 255, 255, 255, 0.44);
+
+  font-size: 10px;
+}
+
+.music-player .controller-container {
+  position: relative;
+  width: 70%;
+  height: 100%;
+
+}
+
+.music-player .controller-container .btn-container {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 70%;
+  height: 20%;
+}
+
+.music-player .controller-container .seek-container {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.music-player .controller-container .seek-container .seek {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 90%;
+  aspect-ratio: 749 / 4;
+
+  appearance: none;
+
+  border-radius: 50px;
+
+  background-color: rgba(255,255,255,0.04);
+
+  overflow: hidden;
+}
+
+.music-player .controller-container .seek-container .seek::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 0px;
+  aspect-ratio: 1;
+
+  border-radius: 50px;
+
+  box-shadow: -1000px 0 0 1000px #FACD66;
+
+  background-color: rgba( 0, 0, 0, 1);
+}
+
+.music-player .controller-container .seek-container .seek-progress {
+  position: absolute;
+  border-radius: 50px;
+  background-color: #FACD66;
+}
+
+.music-player .volume-container {
+  width: 15%;
+  height: 100%;
+
 }
 
 @media screen and (max-width: 430px) {

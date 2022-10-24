@@ -74,6 +74,8 @@ export default function Playlist() {
         albumName = album.name;
     }
 
+    console.log({albumThumbnailUrl: albumThumbnailUrl});
+
     return (
         <div className="playlist" >
             <div className="lead-info-container">
