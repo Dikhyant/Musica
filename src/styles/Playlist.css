@@ -60,6 +60,8 @@
     border-radius: 32px;
 
     background-color: rgba( 255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .playlist .lead-info-container .other-things .btns-container .play-all-btn .play-all-icon {
@@ -86,6 +88,8 @@
     border-radius: 32px;
 
     background-color: rgba( 255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .playlist .lead-info-container .other-things .btns-container .add-to-collection-btn .icon {
@@ -112,6 +116,8 @@
     border-radius: 50%;
 
     background-color: rgba( 255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 /* ------------------------------------------------------------------------------------------------------------- */
@@ -122,6 +128,8 @@
     row-gap: 1.201vh;
     
     margin-top: 5.88vh;
+
+    padding-bottom: 30vh;
 }
 
 .strap {
@@ -134,6 +142,8 @@
 
     color: #ffffff;
     background-color: rgba( 51, 55, 59, 0.37);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .strap:hover {

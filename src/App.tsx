@@ -79,11 +79,17 @@ function App() {
   const playState = useStore( state => state.playState);
   const changePlayState = useStore( state => state.changePlayState );
 
+  useEffect(()=>{
+    console.log("start loading");
+    audioPlayerRef.current?.load();
+  }, [currentSong])
+
   if( audioPlayerRef.current !== null) {
     audioPlayerRef.current.volume = (currentVolume >= 0 ? currentVolume <= 1 ? currentVolume : 1 : 0);
   }
 
   if(playState === PlayState.PLAYING) {
+    console.log("play");
     audioPlayerRef.current?.play();
   }
 
@@ -97,9 +103,7 @@ function App() {
     }
   } , 1000);
 
-  useEffect(()=>{
-    // audioPlayerRef.current?.play();
-  }, [])
+  
 
   function getIconForPlayState(playState: PlayState):string {
     if(playState === PlayState.PAUSED || playState === PlayState.STOPPED) return PlayControllerIcon;
@@ -109,6 +113,7 @@ function App() {
 
   const handleOnChangeSeek:React.ChangeEventHandler<HTMLInputElement> = (e) => {
     console.log({value: e.currentTarget.value});
+    console.log({duration: audioPlayerRef.current?.duration});
     if(audioPlayerRef !== null && audioPlayerRef.current !== null)
       audioPlayerRef.current.currentTime = parseFloat(e.currentTarget.value) / 100.0  * audioPlayerRef.current.duration;
   }
@@ -182,7 +187,7 @@ function App() {
           </div>
 
           <div className="seek-container">
-            <input ref={seekRef} type="range" className="seek" onChange={handleOnChangeSeek} min={0} max={100} />
+            <input ref={seekRef} type="range" className="seek" onChange={handleOnChangeSeek} min={0} max={100} step={0.001} />
             
           </div>
         </div>
@@ -192,9 +197,12 @@ function App() {
           <input ref={volumeControllerRef} type="range" className="volume-controller" onChange={handleOnChangeVolume} value={currentVolume} min={0} max={1} step={0.001} />
         </div>
 
-        <audio id="audio-player" ref={audioPlayerRef} onEnded={()=>{
+        <audio id="audio-player" ref={audioPlayerRef} onLoadedData={()=>{
+          console.log("loaded");
+          changePlayState(PlayState.PLAYING);
+        }} onEnded={()=>{
           changePlayState(PlayState.STOPPED);
-        }} >
+        }}>
           <source src={currentSong.songUrl} />
         </audio>
       </div>

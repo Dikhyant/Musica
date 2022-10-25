@@ -36,9 +36,17 @@ function StrapComponent(props: StrapComponentProps) {
     const changePlayState = useStore( state => state.changePlayState);
 
     const handleOnClick:React.MouseEventHandler<HTMLDivElement> = (e) => {
-        console.log("play " + props.song);
-        changeCurrentSong(props.song);
-        changePlayState(PlayState.PLAYING);
+        console.log({song: props.song});
+        changePlayState(PlayState.STOPPED);
+        changeCurrentSong({
+            artistName: props.song.artistName,
+            songUrl: props.song.songUrl,
+            id: props.song.id,
+            name: props.song.name,
+            thumbnailUrl: props.song.thumbnailUrl,
+            runtime: props.song.runtime,
+            isLiked: props.song.isLiked
+        });
     }
     return (
         <div className="strap" onClick={handleOnClick}>
