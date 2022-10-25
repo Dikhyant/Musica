@@ -11,6 +11,13 @@ import VideoIcon from "./icons/videos_icon.svg";
 import ProfileIcon from "./icons/profile_icon.svg";
 import LogoutIcon from "./icons/Logout_icon.svg";
 import HamburgerIcon from "./icons/hamburger_icon.svg";
+import SuffleIcon from "./icons/shuffle_icon.svg";
+import PreviousIcon from "./icons/previous_icon.svg";
+import PlayControllerIcon from "./icons/play_controller_icon.svg";
+import PauseIcon from "./icons/Pause_icon.svg";
+import NextIcon from "./icons/next_icon.svg";
+import RepeateIcon from "./icons/repeate_icon.svg";
+import VolumeHighIcon from "./icons/volume_high_icon.svg";
 
 import HomeActiveIcon from "./icons/Home_active_icon.svg";
 import PlaylistActiveIcon from "./icons/playlist_active_icon.svg";
@@ -24,6 +31,7 @@ import Playlist from './Pages/Playlist';
 import { useStore } from './utils/Store';
 import axios from 'axios';
 import { api, backendUrl } from './utils/Networks';
+import { PlayState } from './utils/Interfaces';
 
 type NavBtnProp = {
   route:string;
@@ -63,12 +71,50 @@ function App() {
 
   const seekRef = useRef<HTMLInputElement>(null);
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
-  audioPlayerRef.current?.play();
+  const volumeControllerRef = useRef<HTMLInputElement>(null);
+
+  const currentSong = useStore( state => state.currentSong);
+  const currentVolume = useStore( state => state.currentVolume);
+  const changeVolume = useStore( state => state.changeVolume);
+  const playState = useStore( state => state.playState);
+  const changePlayState = useStore( state => state.changePlayState );
+
+  if( audioPlayerRef.current !== null) {
+    audioPlayerRef.current.volume = (currentVolume >= 0 ? currentVolume <= 1 ? currentVolume : 1 : 0);
+  }
+
+  if(playState === PlayState.PLAYING) {
+    audioPlayerRef.current?.play();
+  }
+
+  if(playState === PlayState.PAUSED) {
+    audioPlayerRef.current?.pause();
+  }
+
+  setInterval(()=>{
+    if(audioPlayerRef !== null && audioPlayerRef.current !== null && seekRef !== null && seekRef.current !== null) {
+      seekRef.current.value = ( audioPlayerRef.current?.currentTime / audioPlayerRef.current?.duration * 100 ).toString();
+    }
+  } , 1000);
+
+  useEffect(()=>{
+    // audioPlayerRef.current?.play();
+  }, [])
+
+  function getIconForPlayState(playState: PlayState):string {
+    if(playState === PlayState.PAUSED || playState === PlayState.STOPPED) return PlayControllerIcon;
+
+    return PauseIcon;
+  }
 
   const handleOnChangeSeek:React.ChangeEventHandler<HTMLInputElement> = (e) => {
     console.log({value: e.currentTarget.value});
     if(audioPlayerRef !== null && audioPlayerRef.current !== null)
       audioPlayerRef.current.currentTime = parseFloat(e.currentTarget.value) / 100.0  * audioPlayerRef.current.duration;
+  }
+
+  const handleOnChangeVolume:React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    changeVolume(parseFloat(e.currentTarget.value));
   }
 
   return (
@@ -111,30 +157,45 @@ function App() {
 
       
 
-      <div className="music-player">
+      <div  className="music-player" >
         <div className="thumbnail-and-label-container" >
-          <img src="https://i.scdn.co/image/ab67616d0000b27338c9d97aebb93ebaf060c393" alt="I" className="thumbnail" />
+          <img src={currentSong.thumbnailUrl} alt="I" className="thumbnail" />
           <div className="label-container">
-            <div className="name">O mere khuda</div>
-            <div className="artist-name">Atif Aslam</div>
+            <div className="name">{currentSong.name}</div>
+            <div className="artist-name">{currentSong.artistName}</div>
           </div>
         </div>
 
         <div className="controller-container" >
-          <div className="btn-container"></div>
+          <div className="btn-container">
+            <img src={SuffleIcon} alt="I" className="suffle-icon icon" />
+            <img src={PreviousIcon} alt="I" className="previous-icon icon" />
+            <img src={ getIconForPlayState(playState) } alt="I" className="play-controller-icon" onClick={()=>{
+              if(playState === PlayState.PLAYING) {
+                changePlayState(PlayState.PAUSED);
+                return;
+              }
+              changePlayState(PlayState.PLAYING);
+            }} />
+            <img src={NextIcon} alt="I" className="next-icon icon" />
+            <img src={RepeateIcon} alt="I" className="repeate-icon icon" />
+          </div>
+
           <div className="seek-container">
-            <input ref={seekRef} type="range" className="seek" onChange={handleOnChangeSeek} min={0} max={1} />
+            <input ref={seekRef} type="range" className="seek" onChange={handleOnChangeSeek} min={0} max={100} />
             
           </div>
         </div>
 
-        <div className="volume-container" ></div>
+        <div className="volume-container" >
+          <img src={VolumeHighIcon} alt="I" className="volume-icon" />
+          <input ref={volumeControllerRef} type="range" className="volume-controller" onChange={handleOnChangeVolume} value={currentVolume} min={0} max={1} step={0.001} />
+        </div>
 
-        <audio id="audio-player" ref={audioPlayerRef} onPlaying={(e) => {
-          if(seekRef !== null && seekRef.current !== null)
-            seekRef.current.value = e.currentTarget.currentTime / e.currentTarget.duration + "";
-        }}>
-          <source src='https://hitzop.com/wp-content/uploads/2021/08/Linkin_Park_-_New_Divide.mp3' />
+        <audio id="audio-player" ref={audioPlayerRef} onEnded={()=>{
+          changePlayState(PlayState.STOPPED);
+        }} >
+          <source src={currentSong.songUrl} />
         </audio>
       </div>
 

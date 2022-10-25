@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Album, Song } from "../utils/Interfaces";
+import { Album, PlayState, Song } from "../utils/Interfaces";
 
 import "../styles/Playlist.css";
 
@@ -31,8 +31,17 @@ type StrapComponentProps = {
 }
 
 function StrapComponent(props: StrapComponentProps) {
+
+    const changeCurrentSong = useStore( state => state.changeCurrentSong);
+    const changePlayState = useStore( state => state.changePlayState);
+
+    const handleOnClick:React.MouseEventHandler<HTMLDivElement> = (e) => {
+        console.log("play " + props.song);
+        changeCurrentSong(props.song);
+        changePlayState(PlayState.PLAYING);
+    }
     return (
-        <div className="strap">
+        <div className="strap" onClick={handleOnClick}>
             <img src={props.song.thumbnailUrl} alt="I" className="thumbnail" />
             <img src={WhiteOutlineHeartIcon} alt="I" className="heart_icon" />
             <div className="name">{props.song.name}</div>
@@ -74,7 +83,7 @@ export default function Playlist() {
         albumName = album.name;
     }
 
-    console.log({albumThumbnailUrl: albumThumbnailUrl});
+    // console.log({albumThumbnailUrl: albumThumbnailUrl});
 
     return (
         <div className="playlist" >

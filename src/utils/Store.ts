@@ -1,7 +1,18 @@
 import create from "zustand";
-import { Album, IStore, Song } from "./Interfaces";
+import { Album, IStore, PlayState, Song } from "./Interfaces";
 
 export const useStore = create<IStore>( set => ({
+    currentSong: {
+        id: "",
+        name: "",
+        artistName: "",
+        runtime: 0,
+        isLiked: false,
+        thumbnailUrl: "",
+        songUrl: "",
+    },
+    playState: PlayState.STOPPED,
+    currentVolume: 0.1,
     albums: new Map<string, Album>(),
     groupIdToSongsMap: new Map(),
     addAlbums: (albums: Album[]) => set( state => {
@@ -33,5 +44,12 @@ export const useStore = create<IStore>( set => ({
         return ({
             groupIdToSongsMap: newMap
         })
-    } )
+    } ),
+    changePlayState: (newPlayState: PlayState) => set( state => {
+        return ({
+            playState: newPlayState
+        })
+    }),
+    changeVolume: (newVolume: number) => set( state => ({currentVolume: newVolume})),
+    changeCurrentSong: (newSong: Song) => set( state => ({currentSong: newSong})),
 }) )

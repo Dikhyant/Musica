@@ -9,6 +9,7 @@ export interface MusicItem {
 
 export interface Song extends MusicItem {
     artistName:string;
+    songUrl: string;
 }
 
 export interface Album extends MusicItem {
@@ -19,9 +20,21 @@ export interface Playlist extends MusicItem {
     
 }
 
+export enum PlayState {
+    PLAYING,
+    PAUSED,
+    STOPPED
+}
+
 export interface IStore {
+    currentSong: Song,
+    playState: PlayState,
+    currentVolume: number,
     albums: Map<string, Album>,
     groupIdToSongsMap: Map<string, Song[]>,
     addAlbums: (albums: Album[]) => void,
     addSongsToGroup: (id:string , songs: Song[]) => void,
+    changePlayState: (newPlayState: PlayState) => void,
+    changeVolume: (newVolume: number) => void,
+    changeCurrentSong: (newSong: Song) => void,
 }

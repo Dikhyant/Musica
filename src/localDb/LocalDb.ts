@@ -31,6 +31,7 @@ export const playlists:Playlist[] = [
     },
 ]
 
+/*
 export const songs:Song[] = [
     {
         id: "1",
@@ -92,6 +93,8 @@ export const songs:Song[] = [
         artistName: "Imagine Dragons"
     },
 ];
+
+*/
 
 export const albums:Album[] = [
     {

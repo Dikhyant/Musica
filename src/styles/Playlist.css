@@ -136,6 +136,10 @@
     background-color: rgba( 51, 55, 59, 0.37);
 }
 
+.strap:hover {
+    cursor: pointer;
+}
+
 .strap .thumbnail {
     height: 69.64%;
     aspect-ratio: 1;
