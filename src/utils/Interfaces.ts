@@ -32,9 +32,12 @@ export interface IStore {
     currentVolume: number,
     albums: Map<string, Album>,
     groupIdToSongsMap: Map<string, Song[]>,
+    isNavBarOpen: boolean,
+
     addAlbums: (albums: Album[]) => void,
     addSongsToGroup: (id:string , songs: Song[]) => void,
     changePlayState: (newPlayState: PlayState) => void,
     changeVolume: (newVolume: number) => void,
     changeCurrentSong: (newSong: Song) => void,
+    changeIsNavBarOpen: (isOpen: boolean) => void,
 }

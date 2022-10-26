@@ -169,7 +169,7 @@
     height: 5vh;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 500px) {
     .homepage .playlist-container .currated-playlist .currated-playlist-text {
         margin-top: 0;
         margin-left: 7.97vw;

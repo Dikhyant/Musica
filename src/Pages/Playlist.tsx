@@ -113,6 +113,7 @@ export default function Playlist() {
                         </div>
                         <div className="like-btn">
                             <img src={RedHeartIcon} alt="I" className="icon" />
+                            <div className="like-label" >Like</div>
                         </div>
                     </div>
                 </div>

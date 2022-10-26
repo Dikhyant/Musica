@@ -120,6 +120,10 @@
     -webkit-backdrop-filter: blur(10px);
 }
 
+.playlist .lead-info-container .other-things .btns-container .like-btn .like-label {
+    display: none;
+}
+
 /* ------------------------------------------------------------------------------------------------------------- */
 
 .song-item-container {
@@ -195,4 +199,143 @@
     aspect-ratio: 1;
 
     margin-left: 17.06%;
+}
+
+@media screen and (max-width: 500px) {
+    .playlist .lead-info-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .playlist .lead-info-container .lead-image {
+        width: 86.23vw;
+        aspect-ratio: 357 / 289;
+    
+        border-radius: 25px;
+    }
+
+    .playlist .lead-info-container .other-things {
+        width: 86.23vw;
+
+        margin-top: 4.61vh;
+    }
+
+    .playlist .lead-info-container .other-things .info {
+        width: inherit;
+
+        margin-top: 2.71vh;
+    }
+
+    .playlist .lead-info-container .other-things .btns-container {
+        justify-content: space-between;
+
+        margin-top: 3.39vh;
+    }
+
+    .playlist .lead-info-container .other-things .btns-container .play-all-btn {
+        width: 21.01vw;
+    }
+
+    .playlist .lead-info-container .other-things .btns-container .add-to-collection-btn {
+        width: 36.47vw;
+    }
+
+    .playlist .lead-info-container .other-things .btns-container .like-btn {
+        justify-content: space-evenly;
+        width: 23.18vw;
+        aspect-ratio: 96 / 36;
+
+        border-radius: 32px;
+    }
+
+    .playlist .lead-info-container .other-things .btns-container .like-btn .like-label {
+        display: block;
+
+        color: #ffffff;
+        font-size: 12px;
+    }
+
+    /* --------------------------------------------------------------------------------------------------- */
+
+    .song-item-container {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 85.5vw;
+
+        margin-top: 3.39vh;
+    } 
+
+    .strap {
+        display: grid;
+        grid-template-rows: 50% 50%;
+        grid-template-columns: 11.59vw 59.66vw 1fr;
+        align-items: center;
+        justify-content: center;
+        width: 85.5vw;
+
+        aspect-ratio: 354 / 56;
+
+        border-radius: 10px;
+    }
+
+    .strap .thumbnail {
+        grid-row: 1 / span 2;
+        height: 69.64%;
+        aspect-ratio: 1;
+
+        margin-left: 20.83%;
+
+        border-radius: 5px;
+    }
+
+    .strap .name {
+        grid-column: 2 / span 1;
+
+        width: 100%;
+        height: 100%;
+
+        margin-top: 1.9vh;
+        margin-left: 3.38vw;
+    }
+
+    .strap .heart_icon {
+        display: none;
+    }
+
+    .strap .artist-name-wrapper {
+        grid-row: 2 / span 1;
+        grid-column: 2;
+
+        justify-content: start;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    .strap .artist-name-wrapper .artist-name {
+        margin-left: 3.38vw;
+
+        font-size: 10px;
+    }
+
+    .strap .runtime {
+        justify-self: end;
+
+        margin-right: 2.17vh;
+    }
+
+    .strap .three-dots-icon {
+        grid-row: 1;
+        grid-column: 3;
+
+        justify-self: end;
+
+        height: 50%;
+        aspect-ratio: 1;
+
+        margin-right: 2.17vh;
+
+    }
 }

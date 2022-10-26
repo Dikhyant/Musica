@@ -78,6 +78,8 @@ function App() {
   const changeVolume = useStore( state => state.changeVolume);
   const playState = useStore( state => state.playState);
   const changePlayState = useStore( state => state.changePlayState );
+  const isNavBarOpen = useStore( state => state.isNavBarOpen);
+  const changeIsNavBarOpen = useStore( state => state.changeIsNavBarOpen);
 
   useEffect(()=>{
     console.log("start loading");
@@ -133,12 +135,14 @@ function App() {
           Search
         </div>
         <div className="hamburger-icon-wrapper" >
-          <img src={HamburgerIcon} alt="H" className="hamburger-icon" />
+          <img src={HamburgerIcon} alt="H" className="hamburger-icon" onClick={()=>{
+            changeIsNavBarOpen(!isNavBarOpen);
+          }} />
         </div>
       </header>
 
       <div className="body-wrapper">
-        <div className="nav-bar-wrapper">
+        <div className={`nav-bar-wrapper ${isNavBarOpen ? "nav-bar-wrapper-openned" : "" }`}>
           <div className="nav-bar" >
             <NavBtn icon={HomeIcon} activeStateIcon={HomeActiveIcon} label="Home" route={"/"+routes.HOME} history={history} />
             <NavBtn icon={PlaylistIcon} activeStateIcon={PlaylistActiveIcon} label="My collections" route={"/"+routes.MY_COLLECTIONS} history={history} />

@@ -15,6 +15,8 @@ export const useStore = create<IStore>( set => ({
     currentVolume: 0.1,
     albums: new Map<string, Album>(),
     groupIdToSongsMap: new Map(),
+    isNavBarOpen: false,
+
     addAlbums: (albums: Album[]) => set( state => {
         let newMap: Map<string, Album> = new Map<string, Album>();
         state.albums.forEach((album: Album, id: string) => {
@@ -52,4 +54,6 @@ export const useStore = create<IStore>( set => ({
     }),
     changeVolume: (newVolume: number) => set( state => ({currentVolume: newVolume})),
     changeCurrentSong: (newSong: Song) => set( state => ({currentSong: newSong})),
+
+    changeIsNavBarOpen: (isOpen: boolean) => set( state => ({isNavBarOpen: isOpen})),
 }) )

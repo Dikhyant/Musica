@@ -41,6 +41,8 @@
     row-gap: 2.76vh;
 
     margin-top: 3.125vh;
+
+    padding-bottom: 25vh;
 }
 
 .my-collections .card {
@@ -109,7 +111,7 @@
     opacity: 1;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 500px) {
     .my-collections .music-item-container {
         grid-template-columns: auto;
         grid-auto-flow: row;

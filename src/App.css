@@ -324,7 +324,7 @@ header .hamburger-icon-wrapper {
   box-shadow: -1000px 0px 0px 1000px #FACD66;
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 500px) {
   .app {
     overflow-y: scroll;
     scrollbar-width: none;
@@ -359,6 +359,8 @@ header .hamburger-icon-wrapper {
     align-items: center;
     height: 3.91vh;
 
+    margin-bottom: 6.79vh;
+
     /* margin-left: 9.66vw; */
 
     text-decoration: none;
@@ -384,12 +386,14 @@ header .hamburger-icon-wrapper {
     left: 0px;
     z-index: 2;
 
-    transform: translateX(0%);
+    transform: translateX(-100%);
     
 
     width: 82.12vw;
     height: 100vh;
 
+    margin-top: 0;
+    
     /* padding-top: 14.809vh; */
 
     background-color: #1A1E1F;
@@ -399,13 +403,19 @@ header .hamburger-icon-wrapper {
     transition-timing-function: cubic-bezier(.26,1.09,.66,1.03);
   }
 
+  .body-wrapper .nav-bar-wrapper-openned {
+    transform: translateX(0%);
+
+  } 
+
   .body-wrapper .nav-bar-wrapper .nav-bar { 
     align-items: flex-start;
     
-    width: 100%;
+    width: 80%;
     height: auto;
   
-    margin-left: 0;
+    margin-left: 8.93vw;
+    margin-top: 14.80vh;
   
     background-color: #1A1E1F;
     border-radius: 0;
@@ -414,10 +424,10 @@ header .hamburger-icon-wrapper {
   .body-wrapper .nav-bar-wrapper .personal-bar {
     align-items: flex-start;
 
-    width: 100%;
+    width: 80%;
     height: auto;
   
-    margin-left: 0;
+    margin-left: 8.93vw;
     margin-top: 0;
   
     background-color: #1A1E1F;
@@ -470,9 +480,5 @@ header .hamburger-icon-wrapper {
     padding: 0;
 
     overflow-y:visible;
-  }
-
-  .app:focus-visible .nav-drawer-mobile {
-    transform: translateX(0%);
   }
 }
