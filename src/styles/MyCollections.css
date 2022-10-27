@@ -112,6 +112,24 @@
 }
 
 @media screen and (max-width: 500px) {
+    .my-collections .tab-btn-container {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+
+        justify-content: space-between;
+        width: 86.71vw;
+    }
+    .my-collections .tab-btn-container .my-collection {
+        width: 42.99vw;
+        aspect-ratio: 178 / 37;
+    }
+
+    .my-collections .tab-btn-container .likes {
+        width: 40.09vw;
+        aspect-ratio: 166 / 37;
+    }
+
     .my-collections .music-item-container {
         grid-template-columns: auto;
         grid-auto-flow: row;
