@@ -23,6 +23,8 @@ import HomeActiveIcon from "./icons/Home_active_icon.svg";
 import PlaylistActiveIcon from "./icons/playlist_active_icon.svg";
 import RadioActiveIcon from "./icons/radio_active_icon.svg";
 import VideoActiveIcon from "./icons/videos_active_icon.svg";
+import ProfileActiveIcon from "./icons/profile_active_icon.svg";
+import LogoutActiveIcon from "./icons/Logout_active_icon.svg";
 
 import HomePage from './Pages/HomePage';
 import MyCollections from './Pages/MyCollections';
@@ -32,6 +34,7 @@ import { useStore } from './utils/Store';
 import axios from 'axios';
 import { api, backendUrl } from './utils/Networks';
 import { PlayState } from './utils/Interfaces';
+import UnderDevelopment from './Pages/UnderDevelopment';
 
 type NavBtnProp = {
   route:string;
@@ -46,9 +49,10 @@ type NavBtnState = {
 }
 
 function NavBtn(props: NavBtnProp) {
-  const [state, setState] = useState<NavBtnState>({isActive: props.history?.location.pathname === props.route});
+  const history = useHistory();
+  const [state, setState] = useState<NavBtnState>({isActive: history.location.pathname === props.route});
 
-  props.history?.listen((location: any) => {
+  history.listen((location: any) => {
     // console.log({answer: location.pathname === props.route});
     setState({
       isActive: location.pathname === props.route
@@ -146,13 +150,13 @@ function App() {
           <div className="nav-bar" >
             <NavBtn icon={HomeIcon} activeStateIcon={HomeActiveIcon} label="Home" route={"/"+routes.HOME} history={history} />
             <NavBtn icon={PlaylistIcon} activeStateIcon={PlaylistActiveIcon} label="My collections" route={"/"+routes.MY_COLLECTIONS} history={history} />
-            <NavBtn icon={RadioIcon} activeStateIcon={RadioActiveIcon} label="Radio" route="/" />
-            <NavBtn icon={VideoIcon} activeStateIcon={VideoActiveIcon} label="Music videos" route="/" /> 
+            <NavBtn icon={RadioIcon} activeStateIcon={RadioActiveIcon} label="Radio" route={"/" + routes.RADIO} history={history} />
+            <NavBtn icon={VideoIcon} activeStateIcon={VideoActiveIcon} label="Music videos" route={"/" + routes.VIDEOS} history={history} /> 
           </div>
 
           <div className="personal-bar">
-          <NavBtn icon={ProfileIcon} label="Profile" route="/" />
-          <NavBtn icon={LogoutIcon} label="Log out" route="/" />
+          <NavBtn icon={ProfileIcon} activeStateIcon={ProfileActiveIcon} label="Profile" route={"/" + routes.PROFILE} />
+          <NavBtn icon={LogoutIcon} activeStateIcon={LogoutActiveIcon} label="Log out" route={"/" + routes.LOGOUT} />
           </div>
         </div>
 
@@ -161,12 +165,16 @@ function App() {
             <Route exact path={"/" + routes.HOME} component={HomePage} />
             <Route exact path={"/" + routes.MY_COLLECTIONS} component={MyCollections} />
             <Route exact path={"/" + routes.PLAYLIST + "/:" + routeParams.ID} component={Playlist} />
+            <Route exact path={"/" + routes.RADIO} component={UnderDevelopment} />
+            <Route exact path={"/" + routes.VIDEOS} component={UnderDevelopment} />
+            <Route exact path={"/" + routes.PROFILE} component={UnderDevelopment} />
+            <Route exact path={"/" + routes.LOGOUT} component={UnderDevelopment} />
         </div>
       </div>
 
       
 
-      <div  className="music-player" >
+      <div  className={`music-player ${currentSong.id !== "" ? "music-player-popped-out" : ""} `} >
         <div className="thumbnail-and-label-container" >
           <img src={currentSong.thumbnailUrl} alt="I" className="thumbnail" />
           <div className="label-container">

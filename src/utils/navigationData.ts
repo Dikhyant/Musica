@@ -2,6 +2,10 @@ export const routes = {
     HOME:"",
     MY_COLLECTIONS:"my-collections",
     PLAYLIST: "playlist",
+    RADIO: "radio",
+    VIDEOS: "videos",
+    PROFILE: "profile",
+    LOGOUT: "logout",
 }
 
 export const routeParams = {
