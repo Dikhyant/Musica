@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "../styles/HomePage.css";
 
-import { playlists } from "../localDb/LocalDb";
 import { Playlist, MusicItem, Album } from "../utils/Interfaces";
 
 import HeartIcon from "../icons/Heart_icon.svg";
@@ -30,7 +29,7 @@ function ChartCard({playlist}:ChartCardProps) {
     const history = useHistory();
     return (
         <div className="chart-card" onClick={()=>{
-            history.push("/" + routes.PLAYLIST + "/" + playlist.id)
+            history.push("/" + routes.PLAYLIST + "/" + playlist.id);
         }} >
             <div className="thumbnail-wrapper">
                 <img src={playlist.thumbnailUrl} alt="T" className="thumbnail" />
@@ -49,23 +48,31 @@ function ChartCard({playlist}:ChartCardProps) {
 }
 
 function PlaylistsRenderer() {
-    if(playlists.length === 0) return(<></>);
-    let chartCards = [];
-
-    axios.get(backendUrl + "/" + api.ALBUMS)
-    .then(response => {
-        console.log("Response data");
-        console.log(response.data);
+    const history = useHistory();
+    const albumData = useStore(state => state.albums);
+    let albums: Album[] = new Array<Album>();
+    albumData.forEach((album: Album) => {
+        albums.push(album);
     })
 
-    for(let i = 1; i < ( 4 < playlists.length ? 4 : playlists.length); i++) {
-        chartCards[i] = <ChartCard playlist={playlists[i]} />
+    if(albums.length === 0) return(<></>);
+
+    let chartCards = [];
+
+    for(let i = 1; i < ( 4 < albums.length ? 4 : albums.length); i++) {
+        chartCards[i] = <ChartCard playlist={albums[i]} />
     }
+
+
     return(
         <div className="playlist-container" >
-            <div className="currated-playlist" style={{backgroundImage: `url(${playlists[0].thumbnailUrl})`}} >
+            <div className="currated-playlist" style={{backgroundImage: `url(${albums[0].thumbnailUrl})`}}
+                onClick={()=>{
+                    history.push("/" + routes.PLAYLIST + "/" + albums[0].id);
+                }}
+            >
                 <div className="currated-playlist-text" >Currated playlist</div>
-                <div className="playlist-name" >{playlists[0].name}</div>
+                <div className="playlist-name" >{albums[0].name}</div>
             </div>
 
             <div className="top-charts" >

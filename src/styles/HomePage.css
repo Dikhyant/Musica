@@ -1,3 +1,7 @@
+.homepage {
+    padding-bottom: 30vh;
+}
+
 .homepage .playlist-container {
     display: flex;
 
@@ -14,6 +18,10 @@
 
 
     background-size: cover;
+}
+
+.homepage .playlist-container .currated-playlist:hover {
+    cursor: pointer;
 }
 
 .homepage .playlist-container .currated-playlist .currated-playlist-text {

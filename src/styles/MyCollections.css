@@ -63,6 +63,7 @@
 }
 
 .my-collections .card:hover {
+    cursor: pointer;
     background-size: 150%;
 }
 
