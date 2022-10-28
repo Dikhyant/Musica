@@ -12,7 +12,7 @@ export const useStore = create<IStore>( set => ({
         songUrl: "",
     },
     playState: PlayState.STOPPED,
-    currentVolume: 0.1,
+    currentVolume: 1,
     albums: new Map<string, Album>(),
     groupIdToSongsMap: new Map(),
     isNavBarOpen: false,

@@ -59,7 +59,7 @@ function NavBtn(props: NavBtnProp) {
 
   return (
     <Link to={props.route} className="nav-btn" style={{color: "rgba( 239, 238, 224, 0.25)"}} >
-      <div><img src={ icon } alt="I" className="nav-bar-icon" /></div>
+      <div><img src={ icon } alt="I" className="nav-bar-icon" style={{filter: `${state.isActive ? "drop-shadow(0px 0px 11px rgba( 250, 205, 102, 0.25))" : ""}`}} /></div>
       <div className="nav-btn-label" style={{color: `${state.isActive ? "#ffffff" : "rgba( 239, 238, 224, 0.25)"}`}} >{props.label}</div>
     </Link>
   )
