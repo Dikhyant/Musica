@@ -1,5 +1,5 @@
 import React , { useEffect, useRef, useState } from 'react';
-import { Route , Link , useHistory, useParams } from "react-router-dom";
+import { Route , Link , useHistory } from "react-router-dom";
 import './App.css';
 
 import MusicaLogo from "./Logo/musica_logo.svg";
@@ -31,8 +31,6 @@ import MyCollections from './Pages/MyCollections';
 import { routeParams, routes } from './utils/navigationData';
 import Playlist from './Pages/Playlist';
 import { useStore } from './utils/Store';
-import axios from 'axios';
-import { api, backendUrl } from './utils/Networks';
 import { PlayState } from './utils/Interfaces';
 import UnderDevelopment from './Pages/UnderDevelopment';
 

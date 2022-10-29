@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "../styles/MyCollections.css";
 
 import PlayIcon from "../icons/Play_icon.svg";
@@ -67,6 +67,7 @@ export default function MyCollections(){
             console.error(error);
         });
 
+        // eslint-disable-next-line
     } , [])
     const cards = albums.map(item => (
         <Card musicItem={item} />

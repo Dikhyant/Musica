@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Album, PlayState, Song } from "../utils/Interfaces";
 
 import "../styles/Playlist.css";
